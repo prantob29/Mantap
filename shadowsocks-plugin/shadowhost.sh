@@ -20,11 +20,11 @@ rm -rf /var/lib/crot/ipvps.conf
 #
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-x0-9 | head -c5)
-DOMAIN=test2.sshcloud.live
-SUB_DOMAIN=onichan-${sub}.test2.sshcloud.live
-NS_DOMAIN=slowdns-${subsl}.test2.sshcloud.live
-CF_ID=prantob29@gmail.com
-CF_KEY=3dcb550a77cb0a64dacf205243e3ac550f9db
+DOMAIN=sshcloud.live
+SUB_DOMAIN=onichan-${sub}.sshcloud.live
+NS_DOMAIN=slowdns-${subsl}.sshcloud.live
+CF_ID=prantousa@gmail.com
+CF_KEY=1201d665086604f0732e74129bd65e903ca94
 echo "IP=""$SUB_DOMAIN" >> /var/lib/crot/ipvps.conf
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com);
