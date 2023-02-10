@@ -20,7 +20,7 @@ rm -rf /var/lib/crot/ipvps.conf
 #
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-x0-9 | head -c5)
-DOMAIN=mantapxsl.my.id
+DOMAIN=test2.sshcloud.live
 SUB_DOMAIN=onichan-${sub}.test2.sshcloud.live
 NS_DOMAIN=slowdns-${subsl}.test2.sshcloud.live
 CF_ID=prantob29@gmail.com
