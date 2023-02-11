@@ -2,12 +2,12 @@
 SSH OVER DNS create by SL
 * Link Script Repo SlowDNS dari Sulaiman L
 ```html
-https://github.com/fisabiliyusri/SLDNS
+https://github.com/prantob29/SLDNS
 ```
 
 Script Auto Installer SlowDNS
 ```html
-wget -q -O /usr/bin/install-sldns "https://raw.githubusercontent.com/fisabiliyusri/Mantap/main/SLDNS/install-sldns"
+wget -q -O /usr/bin/install-sldns "https://raw.githubusercontent.com/prantob29/Mantap/main/SLDNS/install-sldns"
 chmod +x /usr/bin/install-sldns
 &&
 install-sldns
