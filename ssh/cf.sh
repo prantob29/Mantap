@@ -24,15 +24,15 @@ exit 0
 fi
 clear
 apt install jq curl -y
-###DOM#AIN=installer.my.id
+###DOM#AIN=sshcloud.live
 DOMAIN=sshcloud.live
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c6)
 SUB_DOMAIN=${sub}.sshcloud.live
 CF_ID=prantousa@gmail.com
 CF_KEY=1201d665086604f0732e74129bd65e903ca94
-##SUB_DOMAIN=${sub}.installer.my.id
-##CF_ID=senowahyu62@gmail.com
-##CF_KEY=84570683099becbeb0f04d8086ce6f309c56c
+##SUB_DOMAIN=${sub}.sshcloud.live
+##CF_ID=prantousa@gmail.com
+##CF_KEY=1201d665086604f0732e74129bd65e903ca94
 set -euo pipefail
 IP=$(wget -qO- ipinfo.io/ip);
 echo "Updating DNS for ${SUB_DOMAIN}..."
