@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 clear
 
 echo -e "Info Opok Tsel:"

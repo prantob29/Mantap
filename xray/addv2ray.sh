@@ -25,7 +25,7 @@ fi
 clear
 source /var/lib/crot/ipvps.conf
 if [[ "$IP" = "" ]]; then
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 else
 domain=$IP
 fi

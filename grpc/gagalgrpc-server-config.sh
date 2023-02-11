@@ -4,13 +4,13 @@
 
 source /var/lib/crot/ipvps.conf
 if [[ "$IP" = "" ]]; then
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 else
 domain=$IP
 fi
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 
 fileaku=grpc-server-config.json
 

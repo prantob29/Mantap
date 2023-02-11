@@ -341,7 +341,7 @@ kernelku=$(uname -r)
 #tipeos2=$(uname -m)
 
 # GETTING DOMAIN NAME
-Domen="$(cat /etc/xray/domain)"
+Domen="sub0.sshcloud.live"
 echo -e ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo -e "\E[44;1;39m              ⇱ Sytem Information ⇲             \E[0m"

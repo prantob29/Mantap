@@ -157,7 +157,7 @@ gosth2="$((blastport3+1))"
 fi
 source /var/lib/crot/ipvps.conf
 if [[ "$IP2" = "" ]]; then
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 else
 domain=$IP2
 fi

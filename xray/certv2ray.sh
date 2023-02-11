@@ -15,7 +15,7 @@ clear
 echo start
 sleep 0.5
 source /var/lib/crot/ipvps.conf
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 cd /root/
 wget -O acme.sh https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh

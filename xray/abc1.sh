@@ -2,7 +2,7 @@
 
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 cd /root/
 wget https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh

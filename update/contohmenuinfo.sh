@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=$(cat /etc/xray/domain)
+domain=sub0.sshcloud.live
 
 echo -e "Info Opok Tsel:"
 echo -e "Methode SSL/TLS Websocket Bug Cloudflare"
