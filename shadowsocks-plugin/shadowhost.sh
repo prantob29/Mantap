@@ -25,11 +25,11 @@ SUB_DOMAIN=onichan-${sub}.sshcloud.live
 NS_DOMAIN=slowdns-${subsl}.sshcloud.live
 CF_ID=prantousa@gmail.com
 CF_KEY=1201d665086604f0732e74129bd65e903ca94
-echo "IP=""$SUB_DOMAIN" >> /var/lib/crot/ipvps.conf
+echo "IP=sub0.sshcloud.live" >> /var/lib/crot/ipvps.conf
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com);
 echo "Updating DNS for ${SUB_DOMAIN}..."
-ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
+ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=sshcloud.live&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" | jq -r .result[0].id)
@@ -44,21 +44,21 @@ if [[ "${#RECORD}" -le 10 ]]; then
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+     --data '{"type":"A","name":"sub0.sshcloud.live","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
 fi
 
 RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-echo "Updating DNS NS for ${NS_DOMAIN}..."
-ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
+     --data '{"type":"A","name":"sub0.sshcloud.live","content":"'${IP}'","ttl":120,"proxied":false}')
+echo "Updating DNS NS for sub1.sshcloud.live..."
+ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=sshcloud.live&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" | jq -r .result[0].id)
 
-RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${NS_DOMAIN}" \
+RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=sub1.sshcloud.live" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" | jq -r .result[0].id)
@@ -68,15 +68,15 @@ if [[ "${#RECORD}" -le 10 ]]; then
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","ttl":120,"proxied":false}' | jq -r .result.id)
+     --data '{"type":"NS","name":"sub1.sshcloud.live","content":"sub0.sshcloud.live","ttl":120,"proxied":false}' | jq -r .result.id)
 fi
 
 RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
-     --data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","ttl":120,"proxied":false}')
-echo "Host Shadowsocks : $SUB_DOMAIN"
-echo "$SUB_DOMAIN" >> /etc/shadowsocks/domain
-echo "$NS_DOMAIN" >> /etc/shadowsocks/nsdomain
+     --data '{"type":"NS","name":"sub1.sshcloud.live","content":"sub0.sshcloud.live","ttl":120,"proxied":false}')
+echo "Host Shadowsocks : sub0.sshcloud.live"
+echo "sub0.sshcloud.live" >> /etc/shadowsocks/domain
+echo "sub1.sshcloud.live" >> /etc/shadowsocks/nsdomain
 

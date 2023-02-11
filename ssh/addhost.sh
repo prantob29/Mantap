@@ -16,7 +16,7 @@ IZIN=$( curl ipinfo.io/ip | grep $MYIP )
 
 clear
 read -rp "Domain/Host : " -e domain
-echo "IP=$domain" >>/var/lib/crot/ipvps.conf
+echo "IP=sub0.sshcloud.live" >>/var/lib/crot/ipvps.conf
 rm -rf /etc/xray/domain
-echo $domain > /etc/xray/domain
+echo "sub0.sshcloud.live" > /etc/xray/domain
 certv2ray
