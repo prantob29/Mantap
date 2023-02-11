@@ -21,8 +21,8 @@ echo "$SUB_DOMAIN" >> /etc/v2ray/domain
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 DOMAIN=sshcloud.live
-SUB_DOMAIN=onichan-${sub}.sshcloud.live
-NS_DOMAIN=zerosl-${sub}.sshcloud.live
+SUB_DOMAIN=onichan-test01.sshcloud.live
+NS_DOMAIN=zerosl-test01.sshcloud.live
 CF_ID=prantousa@gmail.com
 CF_KEY=1201d665086604f0732e74129bd65e903ca94
 set -euo pipefail
