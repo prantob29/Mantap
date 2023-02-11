@@ -30,18 +30,15 @@ sub=$(</dev/urandom tr -dc a-z0-9 | head -c6)
 SUB_DOMAIN=${sub}.sshcloud.live
 CF_ID=prantousa@gmail.com
 CF_KEY=1201d665086604f0732e74129bd65e903ca94
-##SUB_DOMAIN=${sub}.sshcloud.live
-##CF_ID=prantousa@gmail.com
-##CF_KEY=1201d665086604f0732e74129bd65e903ca94
 set -euo pipefail
 IP=$(wget -qO- ipinfo.io/ip);
-echo "Updating DNS for ${SUB_DOMAIN}..."
+echo "Updating DNS for sub0.sshcloud.live..."
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=sshcloud.live&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" | jq -r .result[0].id)
 
-RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
+RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=sub0.sshcloud.live" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" | jq -r .result[0].id)

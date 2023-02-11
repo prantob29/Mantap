@@ -4,14 +4,6 @@ green='\e[0;32m'
 NC='\e[0m'
 MYIP=$(wget -qO- icanhazip.com);
 apt install jq curl -y
-rm -f /root/domain
-rm -f /etc/v2ray/domain
-rm -f /etc/xray/domain
-rm -rf /etc/xray/domain
-rm -rf /root/nsdomain
-rm -rf /var/lib/crot/ipvps.conf
-rm nsdomain
-rm domain
 mkdir -p /usr/bin/xray
 mkdir -p /usr/bin/v2ray
 mkdir -p /etc/xray
@@ -22,7 +14,7 @@ sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 DOMAIN=sshcloud.live
 SUB_DOMAIN=sub0.sshcloud.live
-NS_DOMAIN=zerosl-test01.sshcloud.live
+NS_DOMAIN=sub1.sshcloud.live
 CF_ID=prantousa@gmail.com
 CF_KEY=1201d665086604f0732e74129bd65e903ca94
 set -euo pipefail
