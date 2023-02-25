@@ -82,33 +82,32 @@ systemctl start shadowsocks-libev-server@tls.service
 systemctl enable shadowsocks-libev-server@http.service
 systemctl start shadowsocks-libev-server@http.service
 #
-# echo ""
-# echo "Masukkan Password"
-
-if [[ -z $1 ]]; then
-  echo "Please provide a username as an argument."
-  exit 1
+# check if two arguments were passed
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 username password"
+    exit 1
 fi
 
+# assign the arguments to variables
+user=$1
+masaaktif=$2
 
-until [[ $1 =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-		# read -rp "Password : " -e user
-		CLIENT_EXISTS=$(grep -w $1 /etc/shadowsocks-libev/akun.conf | wc -l)
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
+		CLIENT_EXISTS=$(grep -w $user /etc/shadowsocks-libev/akun.conf | wc -l)
 
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 			echo ""
-			echo -e "Username ${RED}$1${NC} Already On VPS Please Choose Another"
+			echo -e "Username ${RED}${user}${NC} Already On VPS Please Choose Another"
 			exit 1
 		fi
 	done
-read -p "Expired (Days) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
-cat > /etc/shadowsocks-libev/$1-tls.json<<END
+cat > /etc/shadowsocks-libev/$user-tls.json<<END
 {   
     "server":"0.0.0.0",
     "server_port":$tls,
-    "password":"$1",
+    "password":"$user",
     "timeout":60,
     "method":"aes-256-cfb",
     "fast_open":true,
@@ -119,11 +118,11 @@ cat > /etc/shadowsocks-libev/$1-tls.json<<END
     "plugin_opts":"obfs=tls"
 }
 END
-cat > /etc/shadowsocks-libev/$1-http.json <<-END
+cat > /etc/shadowsocks-libev/$user-http.json <<-END
 {
     "server":"0.0.0.0",
     "server_port":$http,
-    "password":"$1",
+    "password":"$user",
     "timeout":60,
     "method":"aes-256-cfb",
     "fast_open":true,
@@ -134,18 +133,18 @@ cat > /etc/shadowsocks-libev/$1-http.json <<-END
     "plugin_opts":"obfs=http"
 }
 END
-chmod +x /etc/shadowsocks-libev/$1-tls.json
-chmod +x /etc/shadowsocks-libev/$1-http.json
+chmod +x /etc/shadowsocks-libev/$user-tls.json
+chmod +x /etc/shadowsocks-libev/$user-http.json
 
-systemctl enable shadowsocks-libev-server@$1-tls.service
-systemctl start shadowsocks-libev-server@$1-tls.service
-systemctl enable shadowsocks-libev-server@$1-http.service
-systemctl start shadowsocks-libev-server@$1-http.service
+systemctl enable shadowsocks-libev-server@$user-tls.service
+systemctl start shadowsocks-libev-server@$user-tls.service
+systemctl enable shadowsocks-libev-server@$user-http.service
+systemctl start shadowsocks-libev-server@$user-http.service
 tmp1=$(echo -n "aes-256-cfb:${user}@${MYIP}:$tls" | base64 -w0)
 tmp2=$(echo -n "aes-256-cfb:${user}@${MYIP}:$http" | base64 -w0)
 linkss1="ss://${tmp1}?plugin=obfs-local;obfs=tls;obfs-host=bing.com"
 linkss2="ss://${tmp2}?plugin=obfs-local;obfs=http;obfs-host=bing.com"
-echo -e "### $1 $exp
+echo -e "### $user $exp
 port_tls $tls
 port_http $http">>"/etc/shadowsocks-libev/akun.conf"
 service cron restart
@@ -156,7 +155,7 @@ echo -e "IP/Host     : $MYIP"
 echo -e "Domain      : $domain"
 echo -e "Port TLS    : $tls"
 echo -e "Port No TLS : $http"
-echo -e "Password    : $1"
+echo -e "Password    : $user"
 echo -e "Method      : aes-256-cfb"
 echo -e "Created     : $hariini"
 echo -e "Expired     : $exp"
@@ -165,4 +164,3 @@ echo -e "Link TLS    : $linkss1"
 echo -e "========================="
 echo -e "Link No TLS : $linkss2"
 echo -e "========================="
-echo -e "Script Mod By SL"
